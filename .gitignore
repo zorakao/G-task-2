@@ -21,6 +21,14 @@ backend-project/public/css/output.css
 .env.*
 !.env.example
 
+# Private keys and local credentials
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*.json
+secrets*.json
+
 # OS files
 .DS_Store
 Thumbs.db
