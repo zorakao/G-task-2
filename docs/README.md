@@ -74,6 +74,19 @@ npm run openapi
 | `docs/plans/` | 開始新開發項目前 | 計畫文件撰寫與追蹤 |
 | `docs/plans/archive/` | 功能完成後 | 歸檔已完成計畫 |
 
+## 六角學院 AI 開發進化營第二場作業
+
+| 文件／素材 | 說明 |
+| --- | --- |
+| [GitHub 專案首頁](../README.md) | 專案摘要、設計與實作成果、重要連結 |
+| [前台設計交付](./designs/flower-life-redesign/README.md) | Design Skill、Pencil MCP、桌面／手機設計、切版與金流交接 |
+| [設計 PDF](./designs/flower-life-redesign/flower-life-design.pdf) | Pencil 設計稿輸出 |
+| [frontend-design Skill](../.agents/skills/frontend-design/SKILL.md) | 前端視覺設計與自我檢視指引 |
+| [ecpay-e2e-checkout Skill](../.agents/skills/ecpay-e2e-checkout/SKILL.md) | Playwright MCP 結帳及綠界 staging E2E 流程定義 |
+| [測試規範與最新驗證紀錄](./TESTING.md) | API 測試規範、歷史紀錄與實際瀏覽器驗證工具說明 |
+
+桌面、手機截圖與關鍵狀態板請見[設計交付中的頁面對照及關鍵狀態](./designs/flower-life-redesign/README.md#頁面對照)。
+
 ## 相關入口
 - 程式進入點：`server.js`、`app.js`
 - DB 初始化：`src/database.js`

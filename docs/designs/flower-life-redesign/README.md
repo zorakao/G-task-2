@@ -7,7 +7,8 @@
 ## 設計檔
 
 - [完整設計 PDF（22 頁）](./flower-life-design.pdf)
-- [Pencil 原始畫布](/Users/zorakao/Desktop/G-task-2.pen)
+- [frontend-design Skill](../../../.agents/skills/frontend-design/SKILL.md)：視覺方向、設計 token、版面與自我檢視指引。
+- [ecpay-e2e-checkout Skill](../../../.agents/skills/ecpay-e2e-checkout/SKILL.md)：Playwright MCP 結帳與綠界 staging 驗證流程定義。
 - 桌面寬 1440px，手機寬 390px；18 張頁面及 3 份關鍵狀態板。
 - 畫布上方是色票、字體、攝影與共用元件。頁面依購物流程分成三列，每張桌面稿右側為對應手機稿，最下方為狀態設計。
 
@@ -54,6 +55,10 @@
 - 實作時需使用原生欄位、按鈕、label 和可見 focus-visible，支援 prefers-reduced-motion；本設計沒有自動循環動效。
 
 ## 流程交接
+
+- `frontend-design` Skill 提供視覺設計方法與品質檢視原則；Pencil MCP 用於製作可編輯的畫布、元件、桌面／手機頁面及狀態稿，並輸出 PDF 與 PNG。
+- 前端切版將畫面落實到既有 EJS、Vue 3 與 Tailwind CSS，接上既有動態資料與 API，不改變原有交易資料流程。
+- 綠界付款由前端導向 ECPay staging；使用者完成模擬付款後回到訂單頁，由後端 QueryTradeInfo 驗證結果，前端依伺服器回應呈現付款狀態。
 
 - 訪客可瀏覽商品與使用購物車；結帳及訂單頁需登入。導覽依登入狀態切換，實作時保留原有管理員後台入口。
 - 收件欄位僅有姓名、電子郵件、地址，皆必填。

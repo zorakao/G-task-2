@@ -121,6 +121,14 @@ describe('Example API', () => {
 
 ## 8. 執行與輸出
 
+### 最新驗證紀錄（2026-11-17）
+
+- **實際完成的成功流程：**使用 Pencil MCP Browser／CDP 操作本機網站，完成註冊與登入、商品加入購物車、結帳建單、ECPay staging 土地銀行 WebATM 模擬付款，回站後 QueryTradeInfo 驗證訂單為 `paid`。測試訂單及環境細節見下方歷史紀錄與 `docs/plans/archive/2026-11-17-implement-pencil-frontstore.md`。
+- **實際檢查的異常／邊界情境：**錯誤登入、空訂單、購物車刪除後空狀態、必填欄位與焦點；`tests/frontstore.test.js` 另涵蓋欄位錯誤阻止送出、付款查詢失敗不誤報成功、防止重複查詢等案例。這些紀錄不表示所有案例都在同一 E2E 流程執行。
+- **瀏覽器工具說明：**當次未提供 Playwright MCP，實際操作使用 Pencil MCP Browser／CDP。`.agents/skills/ecpay-e2e-checkout/SKILL.md` 描述的是 Playwright MCP 的可重複流程定義，不是該次執行工具或獨立測試結果。
+- **設計與響應式檢查：**前台頁面檢查 320px、390px 手機寬度與桌面畫面；已記錄 320px 無水平溢出。綠界付款驗證為 staging 模擬交易，不涉及實際扣款。
+以下歷史紀錄保留當時的測試範圍與結果：
+
 ### 2026-11-17 商品排序驗證
 - 在暫存專案與獨立 SQLite 執行，8 份測試檔、48 項測試全部通過。
 - 排序回歸案例先於舊 SQL 重現失敗；修正後驗證粉色玫瑰刪除再插入、前後台跨 4 頁的商品順序，以及同時間新增商品的穩定順序。

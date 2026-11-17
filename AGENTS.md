@@ -19,6 +19,11 @@ backend-project — Node.js + Express + SQLite（better-sqlite3）的花卉電�
 - 訂單建立流程需維持 transaction 原子性（建單、建明細、扣庫存、清購物車）。
 - 功能開發使用 `docs/plans/` 記錄計畫；完成後移至 `docs/plans/archive/`。
 
+## Skills 使用時機
+- 調整或建立前台視覺、頁面版型與互動呈現時，先參考 [`frontend-design`](./.agents/skills/frontend-design/SKILL.md) Skill，建立符合產品情境的設計方向並依其原則檢視成品。
+- 要驗證購物車、結帳、綠界 staging 付款或訂單付款狀態時，使用 [`ecpay-e2e-checkout`](./.agents/skills/ecpay-e2e-checkout/SKILL.md) Skill，依其 Playwright MCP 流程執行並記錄實際使用的瀏覽器工具與結果。
+- Skill 內容是流程與規範；測試文件只將有實際執行紀錄的項目標示為已驗證。
+
 ## 詳細文件
 - `./docs/README.md` — 項目介紹與快速開始
 - `./docs/ARCHITECTURE.md` — 架構、目錄結構、資料流
