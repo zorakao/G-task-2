@@ -1,0 +1,7 @@
+<div id="app" class="page-width page-section page-stack min-h-[700px]" v-cloak>
+  <div class="page-heading"><h1>我的訂單</h1><p>查看訂單詳情與付款狀態。</p></div>
+  <div v-if="loading"><%- include('../partials/loading') %></div>
+  <div v-else-if="loadError" class="error-state" role="alert"><h2>暫時無法載入訂單</h2><p>請確認網路連線後重新載入。</p><button class="button button-secondary" @click="loadOrders">重新載入</button></div>
+  <div v-else-if="!orders.length" class="empty-state"><fl-icon name="package"></fl-icon><h2>還沒有訂單</h2><p>挑一份花禮，開始記下你的心意。</p><a class="button" href="/">去選花</a></div>
+  <table v-else class="orders-table"><caption class="sr-only">我的訂單與付款狀態</caption><thead><tr><th scope="col">訂單編號</th><th scope="col">訂購日期</th><th scope="col">訂單金額</th><th scope="col">付款狀態</th><th scope="col"><span class="sr-only">查看訂單</span></th></tr></thead><tbody><tr v-for="order in orders" :key="order.id"><td><span class="sr-only">訂單編號 </span>{{ order.order_no }}</td><td>{{ date(order.created_at) }}</td><td>{{ money(order.total_amount) }}</td><td><span class="status-badge" :class="'status-' + order.status"><fl-icon :name="statusIcon(order.status)"></fl-icon>{{ statusLabel(order.status) }}</span></td><td><a class="text-link whitespace-nowrap" :href="'/orders/' + order.id" :aria-label="'查看訂單 ' + order.order_no + ' 詳情'">查看詳情<fl-icon name="chevron-right"></fl-icon></a></td></tr></tbody></table>
+</div>

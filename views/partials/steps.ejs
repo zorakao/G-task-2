@@ -1,0 +1,7 @@
+<ol class="checkout-steps" aria-label="購物進度">
+  <% ['購物車', '收件資訊', '付款'].forEach(function(label, index) { %>
+  <li class="<%= step === index ? 'current' : '' %>" <%- step === index ? 'aria-current="step"' : '' %>>
+    <span class="step-number"><%= index + 1 %></span><span><%= label %></span>
+  </li>
+  <% }); %>
+</ol>

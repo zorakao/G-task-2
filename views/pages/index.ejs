@@ -1,0 +1,23 @@
+<div id="app" v-cloak>
+  <section class="home-hero" id="home-hero" aria-labelledby="home-title">
+    <div class="hero-copy"><h1 id="home-title">日子裡，<br>留一束花的位置。</h1><p>不必等一個特別的日子。<br>讓當季的花，替你說心裡的話。</p><a class="button" href="#products">挑一束喜歡的花</a><p class="hero-note">花藝師手工包裝，心意隨花送達。</p></div>
+    <img class="hero-image" src="/images/flowers/hero.png?v=flower-life-2" alt="清晨光線下，白色與淡紫色鮮花在玻璃花瓶中綻放" width="820" height="600" fetchpriority="high">
+  </section>
+  <section id="products" class="page-width page-section page-stack" aria-labelledby="products-title">
+    <div class="catalog-heading"><div class="page-heading"><h2 id="products-title">找到，心裡的那束花。</h2><p>送給在意的人，也送給自己。</p></div><p class="product-count" v-if="!loading && !loadError">全部 {{ pagination.total }} 件花禮</p></div>
+    <div v-if="loading"><%- include('../partials/loading') %></div>
+    <div v-else-if="loadError" class="error-state" role="alert"><h2>暫時無法載入花禮</h2><p>請確認網路連線後重新載入。</p><button class="button button-secondary" @click="loadProducts(pagination.page)">重新載入</button></div>
+    <div v-else-if="!products.length" class="empty-state"><fl-icon name="flower-2"></fl-icon><h2>目前沒有花禮</h2><p>我們正在整理新的花材，請稍後再來看看。</p><button class="button" @click="loadProducts(1)">重新載入</button></div>
+    <template v-else>
+      <div class="product-grid">
+        <article v-for="product in products" :key="product.id" class="product-card">
+          <a :href="'/products/' + product.id" class="product-picture" :aria-label="'查看' + product.name"><img :src="productImage(product)" :alt="product.name" loading="lazy" width="408" height="320" @error="imageFallback"></a>
+          <div class="product-card-info"><h3><a :href="'/products/' + product.id">{{ product.name }}</a></h3><p class="product-description">{{ shortDescription(product) }}</p><p class="product-price">{{ money(product.price) }}</p></div>
+          <button class="button button-secondary product-add" :disabled="product._adding || product.stock <= 0" @click="addToCart(product)"><fl-icon name="plus"></fl-icon>{{ product.stock <= 0 ? '已售完' : product._adding ? '加入中…' : '加入購物車' }}</button>
+        </article>
+      </div>
+      <nav class="pagination" v-if="pagination.totalPages > 1" aria-label="商品分頁"><button v-for="p in pagination.totalPages" :key="p" @click="loadProducts(p)" :aria-label="'第 ' + p + ' 頁'" :aria-current="p === pagination.page ? 'page' : null">{{ p }}</button></nav>
+    </template>
+  </section>
+  <section class="brand-story" id="brand-story"><div class="page-width brand-story-inner"><h2>花有花期，<br>心意沒有期限。</h2><div><p>從挑選花材到繫上最後一條緞帶，<br>我們把你的心意，放在每一個細節裡。</p><small>每束花附贈保鮮指南，讓喜歡的風景多停留幾天。</small></div></div></section>
+</div>

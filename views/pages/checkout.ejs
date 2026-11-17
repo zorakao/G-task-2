@@ -1,0 +1,17 @@
+<div id="app" class="page-width page-section page-stack" v-cloak>
+  <%- include('../partials/steps', { step: 1 }) %>
+  <div class="page-heading"><h1>確認收件資訊</h1><p>請確認收件資訊，建立訂單後再前往付款。</p></div>
+  <div v-if="loading"><%- include('../partials/loading') %></div>
+  <div v-else-if="loadError" class="error-state" role="alert"><h2>暫時無法載入花禮</h2><p>請確認網路連線後再試一次。</p><button class="button button-secondary" @click="loadCart">重新載入</button></div>
+  <div v-else class="commerce-grid">
+    <form id="checkout-form" class="checkout-form" @submit.prevent="submitOrder" novalidate>
+      <h2 class="section-heading">收件資訊</h2><p class="form-help">以下欄位皆為必填。</p>
+      <div class="form-field"><label for="recipient-name">收件人姓名</label><input id="recipient-name" class="text-input" v-model.trim="form.recipientName" placeholder="請輸入收件人姓名" autocomplete="shipping name" required :aria-invalid="!!errors.recipientName" :aria-describedby="errors.recipientName ? 'recipient-name-error' : null"><p id="recipient-name-error" class="field-error" v-if="errors.recipientName">{{ errors.recipientName }}</p></div>
+      <div class="form-field"><label for="recipient-email">電子郵件</label><input id="recipient-email" class="text-input" v-model.trim="form.recipientEmail" type="email" placeholder="請輸入 Email" autocomplete="shipping email" inputmode="email" required :aria-invalid="!!errors.recipientEmail" :aria-describedby="errors.recipientEmail ? 'recipient-email-error' : null"><p id="recipient-email-error" class="field-error" v-if="errors.recipientEmail">{{ errors.recipientEmail }}</p></div>
+      <div class="form-field"><label for="recipient-address">收件地址</label><textarea id="recipient-address" class="text-input resize-y" v-model.trim="form.recipientAddress" placeholder="請輸入收件地址" autocomplete="shipping street-address" rows="2" required :aria-invalid="!!errors.recipientAddress" :aria-describedby="errors.recipientAddress ? 'recipient-address-error' : 'recipient-address-help'"></textarea><p id="recipient-address-error" class="field-error" v-if="errors.recipientAddress">{{ errors.recipientAddress }}</p><p id="recipient-address-help" class="form-help">請填寫完整地址，包含樓層與門牌。</p></div>
+      <div v-if="submitError" class="error-state" role="alert"><h2>訂單尚未建立</h2><p>{{ submitError }}</p></div>
+      <section class="checkout-summary-items"><h2 class="section-heading">確認你的花禮</h2><div v-for="item in cartItems" :key="item.id" class="checkout-summary-item"><img :src="productImage(item.product)" :alt="item.product.name" width="76" height="88" @error="imageFallback"><div><h3>{{ item.product.name }}</h3><small>數量 {{ item.quantity }}</small></div><p>{{ money(item.product.price * item.quantity) }}</p></div></section>
+    </form>
+    <aside class="summary lg:sticky lg:top-7"><h2>訂單摘要</h2><div class="summary-row"><span>商品小計</span><span>{{ money(cartTotal) }}</span></div><div class="summary-row"><span>運費</span><span>免運</span></div><div class="summary-row summary-total"><span>總計</span><span>{{ money(cartTotal) }}</span></div><button type="submit" form="checkout-form" class="button" :disabled="submitting">{{ submitting ? '建立中…' : '建立訂單' }}</button><p class="summary-note"><fl-icon name="lock-keyhole"></fl-icon>建立訂單後，再前往綠界付款。</p><p class="form-help">你可以在訂單詳情中查看付款狀態。</p></aside>
+  </div>
+</div>

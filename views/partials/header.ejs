@@ -1,0 +1,14 @@
+<header class="store-header">
+  <div class="announcement"><span class="hidden sm:inline">一束心意，送進日常。</span>訂單滿 NT$500 免運</div>
+  <div class="store-nav page-width">
+    <button type="button" id="menu-open" class="icon-button mobile-menu-toggle" aria-label="開啟選單" aria-controls="mobile-menu" aria-expanded="false"><%- include('icon', { name: 'menu' }) %></button>
+    <a class="brand" href="/" aria-label="花漾生活首頁"><span>花漾生活</span><span class="brand-english">Flower Life</span></a>
+    <nav class="desktop-links" aria-label="主要導覽"><a href="/">所有花禮</a><a id="orders-link" href="/orders" hidden>我的訂單</a></nav>
+    <div id="auth-nav" class="auth-nav desktop-links"><a href="/login"><%- include('icon', { name: 'user-round' }) %>登入 / 註冊</a></div>
+    <a href="/cart" class="cart-link" aria-label="購物車"><%- include('icon', { name: 'shopping-bag' }) %><span class="hidden sm:inline">購物車</span><span id="cart-badge" hidden></span></a>
+  </div>
+  <dialog id="mobile-menu" class="mobile-menu" aria-label="主要選單">
+    <div class="mobile-menu-heading"><a href="/" class="brand">花漾生活</a><button type="button" id="menu-close" class="icon-button" aria-label="關閉選單"><%- include('icon', { name: 'x' }) %></button></div>
+    <div class="mobile-menu-content"><p id="mobile-greeting" class="text-muted">為每一天，留一點美好。</p><nav aria-label="手機主要導覽"><a href="/">所有花禮<%- include('icon', { name: 'chevron-right' }) %></a><a href="/cart">購物車<span class="mobile-cart-count"></span></a><a href="/orders" id="mobile-orders-link" hidden>我的訂單<%- include('icon', { name: 'chevron-right' }) %></a><a href="/admin/products" id="mobile-admin-link" hidden>後台管理<%- include('icon', { name: 'chevron-right' }) %></a></nav><div id="mobile-auth-nav"><a href="/login" class="button button-secondary w-full">登入 / 註冊</a></div></div>
+  </dialog>
+</header>

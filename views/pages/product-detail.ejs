@@ -1,0 +1,14 @@
+<div id="app" class="page-width page-section page-stack" data-product-id="<%= productId %>" v-cloak>
+  <nav class="breadcrumb" aria-label="麵包屑"><a href="/">所有花禮</a><span>/</span><span>{{ product ? product.name : '商品詳情' }}</span></nav>
+  <div v-if="loading"><%- include('../partials/loading') %></div>
+  <div v-else-if="notFound" class="empty-state"><fl-icon name="flower-2"></fl-icon><h1>這束花，已經不在這裡。</h1><p>你尋找的商品不存在，或已經下架。</p><a href="/" class="button">回到所有花禮</a></div>
+  <div v-else-if="loadError" class="error-state" role="alert"><h1 class="section-heading">暫時無法載入花禮</h1><p>請確認網路連線後重新載入。</p><button class="button button-secondary" @click="loadProduct">重新載入</button></div>
+  <template v-else-if="product">
+    <section class="product-detail-grid" id="product-purchase">
+      <img class="product-detail-photo" :src="productImage(product)" :alt="product.name" width="640" height="640" @error="imageFallback">
+      <div class="product-detail-info"><div class="page-heading"><h1>{{ product.name }}</h1><p>{{ product.name === '粉色玫瑰花束' ? '把說不出口的心意，交給花。' : '送給在意的人，也送給自己。' }}</p></div><p class="product-detail-price">{{ money(product.price) }}</p><p class="body-copy">{{ product.description }}</p><hr class="divider"><p class="stock-line"><fl-icon :name="product.stock > 0 ? 'check' : 'clock-3'"></fl-icon>{{ product.stock > 0 ? '現貨 ' + product.stock + ' 件' : '這束花，暫時售完了。' }}</p><p class="stock-note">包含緞帶包裝與保鮮指南小卡</p>
+      <div class="product-buy"><div class="quantity-control" role="group" aria-label="購買數量"><button @click="decrease" :disabled="quantity <= 1 || adding" aria-label="減少數量"><fl-icon name="minus"></fl-icon></button><output aria-live="polite">{{ quantity }}</output><button @click="increase" :disabled="quantity >= product.stock || adding" aria-label="增加數量"><fl-icon name="plus"></fl-icon></button></div><button class="button" @click="addToCart" :disabled="adding || product.stock <= 0">{{ product.stock <= 0 ? '已售完' : adding ? '加入中…' : '加入購物車' }}</button></div><p class="shipping-note">訂單滿 NT$500 免運。</p><a v-if="product.stock <= 0" class="text-link" href="/">查看其他花禮<fl-icon name="chevron-right"></fl-icon></a></div>
+    </section>
+    <section class="care-section"><h2 class="section-heading">關於這份花禮</h2><div class="care-columns"><div><h3>花材與包裝</h3><p class="body-copy">每份花禮由花藝師親手整理與包裝。花材因季節略有差異，保留整體色調與風格。</p></div><div><h3>讓花多陪你幾天</h3><p class="body-copy">鮮花收到後修剪花腳，放入乾淨花瓶。每天換水，避開陽光直曬與冷氣出風口。盆栽與乾燥花請依隨附指南照顧。</p></div></div></section>
+  </template>
+</div>
